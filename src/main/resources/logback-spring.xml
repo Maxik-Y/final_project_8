@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Вихід у Logstash через TCP -->
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <destination>localhost:5000</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">

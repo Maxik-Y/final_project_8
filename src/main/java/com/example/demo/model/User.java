@@ -20,7 +20,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    // Constructors, getters and setters
     public User() {}
 
     public User(String username, String password) {
@@ -63,7 +62,6 @@ public class User implements UserDetails {
         return true;
     }
 
-    // Standard getters and setters
     public Long getId() {
         return id;
     }

@@ -3,7 +3,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
     environment:
       - discovery.type=single-node
-      - xpack.security.enabled=false  # Вимкнення аутентифікації для тестування
+      - xpack.security.enabled=false
     ports:
       - "9200:9200"
     volumes:

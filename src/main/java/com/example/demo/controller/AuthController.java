@@ -1,9 +1,6 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.model.User;
 import com.example.demo.security.JwtUtil;
-
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,21 +27,20 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // HTML forms
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // Повертає шаблон register.html
+        return "register";
     }
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "login"; // Повертає шаблон login.html
+        return "login";
     }
 
     @PostMapping("/api/login")
     public ResponseEntity<?> loginUser(
-            @RequestParam String username,  // Приймає параметри форми
+            @RequestParam String username,
             @RequestParam String password
     ) {
         Authentication authentication = authenticationManager.authenticate(

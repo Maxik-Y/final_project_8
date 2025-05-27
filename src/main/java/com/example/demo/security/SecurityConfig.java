@@ -26,7 +26,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Вимкнути CSRF для API
+                .csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(authEntryPoint)
                 )
@@ -34,22 +34,19 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        // Дозволити доступ до HTML-сторінок та статичних ресурсів
                         .requestMatchers(
                                 "/auth/login",
                                 "/auth/register",
-                                "/error", // Дозволити сторінки помилок
-                                "/static/**", // Дозволити CSS/JS
-                                "/favicon.ico" // Дозволити іконку
+                                "/error",
+                                "/static/**",
+                                "/favicon.ico"
                         ).permitAll()
-                        // Дозволити доступ до API-ендпоінтів
                         .requestMatchers("/auth/api/**").permitAll()
-                        // Всі інші запити потребують автентифікації
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/auth/login") // Сторінка логіну
-                        .permitAll() // Дозволити доступ до сторінки логіну
+                        .loginPage("/auth/login")
+                        .permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
