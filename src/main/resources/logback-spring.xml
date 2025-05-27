@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5000</destination>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"app":"hotel-booking-app","env":"${spring.profiles.active:dev}"}</customFields>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="logstash"/>
-    </root>
+    <springProfile name="prod">
+        <root level="ERROR">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+        <logger name="com.example.demo" level="INFO"/>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
 </configuration>
